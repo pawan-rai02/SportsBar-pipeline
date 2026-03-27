@@ -17,6 +17,8 @@ This disparity led to severe challenges in reporting, forecasting, and cross-com
 
 This repository contains the complete data pipeline implementation, documentation, and evaluation findings.
 
+![Project Outline](images/projectoutline.png)
+
 ---
 
 ## Table of Contents
@@ -77,6 +79,8 @@ Databricks combines the capabilities of a **data lake**, **data warehouse**, and
 ---
 
 ## Architecture
+
+![Project Architecture](images/project_architecture.png)
 
 ### Lakehouse Architecture
 
@@ -152,6 +156,8 @@ Databricks combines the capabilities of a **data lake**, **data warehouse**, and
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
+![Pipeline](images/pipeline.png)
+
 ---
 
 ## Folder Structure
@@ -163,51 +169,28 @@ SportsBar-pipeline/
 ├── QUICKSTART.md                      # Quick reference guide
 │
 ├── images/                            # Project images & diagrams
-│   ├── pipeline.png                  # Pipeline architecture diagram
-│   ├── project_architecture.png      # Overall project architecture
-│   └── projectoutline.png            # Project outline visual
 │
 ├── docs/                              # Documentation & reports
-│   └── fmcg_dashboard.pdf            # Dashboard documentation
 │
 ├── data/                              # Source data files
 │   ├── 1_parent_company/             # Atlikon (Parent Company) ERP data
-│   │   ├── full_load/
-│   │   │   ├── dim_customers.csv
-│   │   │   ├── dim_products.csv
-│   │   │   ├── dim_gross_price.csv
-│   │   │   └── fact_orders.csv
-│   │   └── incremental_load/
-│   │       ├── fact_orders.csv
-│   │       └── incremental_data_parent_company_query.txt
 │   │
 │   └── 2_child_company/              # SportsBar (Child Company) data
-│       ├── full_load/
-│       │   ├── products/
-│       │   │   └── products.csv
-│       │   └── orders/
-│       │       └── landing/          # Raw order files (daily)
-│       │
-│       └── incremental_load/
-│           └── orders/               # Daily incremental order files
 │
-└── code/                              # Python scripts & SQL queries
-    ├── setup/                        # Initial setup & configuration
-    │   ├── dim_date_table_creation.py
-    │   ├── setup_catalog.py
-    │   └── utilities.py
+└── code/                              # Jupyter notebooks
+    ├── 01_setup/                     # Initial setup & configuration
+    │   ├── dim_date_table_creation.ipynb
+    │   ├── setup_catalog.ipynb
+    │   └── utilities.ipynb
     │
-    ├── dimension_data_processing/    # Dimension table processing
-    │   ├── 1_customer_data_processing.py
-    │   ├── 2_products_data_processing.py
-    │   └── 3_pricing_data_processing.py
+    ├── 02_dimension_data_processing/ # Dimension table processing
+    │   ├── 1_customer_data_processing.ipynb
+    │   ├── 2_products_data_processing.ipynb
+    │   └── 3_pricing_data_processing.ipynb
     │
-    ├── fact_data_processing/         # Fact table processing
-    │   ├── 1_full_load_fact.py
-    │   └── 2_incremental_load.py
+    ├── 03_fact_data_processing/      # Fact table processing
     │
-    └── dashboarding/                 # Dashboard queries & configs
-        └── denormalise_table_query_fmcg.sql
+    └── 04_dashboarding/              # Dashboard queries & configs
 ```
 
 ---
@@ -250,29 +233,29 @@ Source Systems → Bronze (Raw) → Silver (Cleansed) → Gold (Analytics) → D
 ### Initial Setup
 
 1. **Create Catalog & Schemas**
-   ```python
-   # Run: code/setup/setup_catalog.py
+   ```
+   # Run: code/01_setup/setup_catalog.ipynb
    ```
 
 2. **Create Dimension Date Table**
-   ```python
-   # Run: code/setup/dim_date_table_creation.py
+   ```
+   # Run: code/01_setup/dim_date_table_creation.ipynb
    ```
 
 3. **Configure Utilities**
-   ```python
-   # Review: code/setup/utilities.py
+   ```
+   # Review: code/01_setup/utilities.ipynb
    # Update connection strings and paths as needed
    ```
 
 ### Running the Pipeline
 
 1. Upload notebooks to Databricks Workspace
-2. Execute scripts in order:
-   - `setup/setup_catalog.py`
-   - `setup/dim_date_table_creation.py`
-   - `dimension_data_processing/` (all scripts)
-   - `fact_data_processing/` (all scripts)
+2. Execute notebooks in order:
+   - `01_setup/setup_catalog.ipynb`
+   - `01_setup/dim_date_table_creation.ipynb`
+   - `02_dimension_data_processing/` (all notebooks)
+   - `03_fact_data_processing/` (all notebooks)
 
 ---
 
@@ -296,8 +279,8 @@ A comprehensive dashboard has been created in Databricks Lakeview for:
 ### Denormalized Query
 
 For custom analytics, use the denormalized view:
-```sql
--- See: code/dashboarding/denormalise_table_query_fmcg.txt
+```
+# See: code/04_dashboarding/
 ```
 
 ---
