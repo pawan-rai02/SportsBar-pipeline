@@ -1,0 +1,63 @@
+# SportsBar Pipeline - .gitignore
+
+# Ignore data files (CSV, Excel, etc.)
+*.csv
+*.xlsx
+*.xls
+*.parquet
+*.json
+*.xml
+
+# Ignore large binary files
+*.png
+*.jpg
+*.jpeg
+*.pdf
+*.zip
+*.tar
+*.gz
+
+# Databricks specific
+.databricks/
+*.dbc
+__pycache__/
+*.pyc
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Python virtual environments
+venv/
+env/
+.venv/
+
+# Jupyter notebooks (if not tracking)
+*.ipynb_checkpoints/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Build outputs
+dist/
+build/
+*.egg-info/
