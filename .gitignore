@@ -8,14 +8,20 @@
 *.json
 *.xml
 
-# Ignore large binary files
-*.png
+# Ignore large binary files (except images folder)
 *.jpg
 *.jpeg
 *.pdf
 *.zip
 *.tar
 *.gz
+
+# Allow images in the images folder
+!images/*.png
+!images/*.jpg
+!images/*.jpeg
+!images/*.gif
+!images/*.svg
 
 # Databricks specific
 .databricks/
